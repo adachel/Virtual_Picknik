@@ -1,9 +1,6 @@
 package org.example;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class Word implements IMethodWords {
     private String inputsentence ;
@@ -65,16 +62,32 @@ public class Word implements IMethodWords {
 
     @Override
     public String WordFrequency(List<String> text) {
+        String result = "";
+        int count = 0;
         HashMap< String, Integer> map = new HashMap<>();
+        for (int i = 0; i < text.size(); i++) {
+            String a = text.get(i);
+            if (!map.containsKey(text.get(i))){
+                map.put(text.get(i), count + 1);
+            }
+            else {
+                int value = map.get(text.get(i));
+                map.put(text.get(i), value + 1);
+            }
+        }
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            result = result + entry.getKey() + " - " + entry.getValue() + '\n';
 
-        return "";
+        }
+        String er = result;
+        return result;
     }
-
 
     @Override
     public String toString() {
         return "Count words: " + CountWords(ParseText(inputsentence)) + "\n"
-                + "Longest word: " + LongestWord(ParseText(inputsentence));
+                + "Longest word: " + LongestWord(ParseText(inputsentence)) + "\n"
+                + "WordFrequency:" + "\n" + WordFrequency(ParseText(inputsentence));
     }
 
 
