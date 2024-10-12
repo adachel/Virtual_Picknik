@@ -9,6 +9,11 @@ public class Word implements IMethodWords {
         this.inputsentence = inputSentence;
     }
 
+    /**
+     * "Очищает" текст от знаков
+     * @param sentence - входящий текст
+     * @return - коллекция слов
+     */
     @Override
     public List<String> ParseText(String sentence) {
         sentence =  sentence.replace('!', ' ')
@@ -42,37 +47,52 @@ public class Word implements IMethodWords {
         return arr;
     }
 
+    /**
+     * Считает, сколько слов в тексте
+     * @param arr - коллекция слов
+     * @return - размер коллекции
+     */
     @Override
     public int CountWords(List<String> arr) {
         return arr.size();
     }
 
+    /**
+     * Находит самое длинное слово в коллекции
+     * @param arr - коллекция слов
+     * @return - самое длинное слово в коллекции
+     */
     @Override
-    public String LongestWord(List<String> text) {
+    public String LongestWord(List<String> arr) {
         String maxWord = "";
         int lenWord = 0;
-        for (int i = 0; i < text.size(); i++) {
-            if (text.get(i).length() > lenWord){
-                lenWord = text.get(i).length();
-                maxWord = text.get(i);
+        for (int i = 0; i < arr.size(); i++) {
+            if (arr.get(i).length() > lenWord){
+                lenWord = arr.get(i).length();
+                maxWord = arr.get(i);
             }
         }
         return maxWord;
     }
 
+    /**
+     * частота появления слов в коллекции
+     * @param arr - коллекция слов
+     * @return - текст, где слово и сколько таких слов в тексте
+     */
     @Override
-    public String WordFrequency(List<String> text) {
+    public String WordFrequency(List<String> arr) {
         String result = "";
         int count = 0;
         HashMap< String, Integer> map = new HashMap<>();
-        for (int i = 0; i < text.size(); i++) {
-            String a = text.get(i);
-            if (!map.containsKey(text.get(i))){
-                map.put(text.get(i), count + 1);
+        for (int i = 0; i < arr.size(); i++) {
+            String a = arr.get(i);
+            if (!map.containsKey(arr.get(i))){
+                map.put(arr.get(i), count + 1);
             }
             else {
-                int value = map.get(text.get(i));
-                map.put(text.get(i), value + 1);
+                int value = map.get(arr.get(i));
+                map.put(arr.get(i), value + 1);
             }
         }
         for (Map.Entry<String, Integer> entry : map.entrySet()) {
@@ -89,8 +109,4 @@ public class Word implements IMethodWords {
                 + "Longest word: " + LongestWord(ParseText(inputsentence)) + "\n"
                 + "WordFrequency:" + "\n" + WordFrequency(ParseText(inputsentence));
     }
-
-
-
-
 }
