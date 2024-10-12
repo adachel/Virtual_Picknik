@@ -1,17 +1,28 @@
 package org.example;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-public class Main {
-    public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+
+
+public class Main {
+
+    public static String GetTextFromFile(String fileName){
+        String line = "empty";
+        try {
+            String pathProject = System.getProperty("user.dir");
+            String pathFile = pathProject.concat("/input.txt");
+            line = Files.readString(Path.of(pathFile));
         }
+        catch (Exception e) {System.out.println(e.getMessage());;}
+        return line;
+    }
+    public static void main(String[] args) throws IOException {
+        String fileName = "input.txt";
+        String text = GetTextFromFile(fileName);
+
+        Word result = new Word(text);
+        System.out.println(result.toString());
     }
 }
